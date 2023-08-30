@@ -2,7 +2,7 @@ import time
 
 out_dir = '/content/drive/MyDrive/Model' # for google colab, for regular use, set value to 'out-chat'
 eval_interval = 5
-eval_iters = 20
+eval_iters = 40
 wandb_log = False # feel free to turn on
 wandb_project = 'gpt2finetune'
 wandb_run_name = 'ft-' + str(time.time())
