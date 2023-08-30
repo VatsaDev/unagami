@@ -7,7 +7,7 @@ all updates at [updates.md](https://github.com/VatsaDev/unagami/blob/main/update
 **Add Colab link**      
 
 ## Features
-**TODO**
+ - speaks several, proper informative sentences. 
 
 
 ## how does it work?
