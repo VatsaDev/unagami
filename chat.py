@@ -11,6 +11,7 @@ init_from = 'resume'
 out_dir = 'out-chat' # where finetuned model lives
 num_samples = 1 # no samples. 1 for 1 chat at a time
 max_new_tokens = 150
+ans_long=False
 temperature = 0.8 
 top_k = 5 # retain only the top_k most likely tokens, clamp others to have 0 probability
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', etc.
@@ -86,6 +87,10 @@ encode = lambda s: enc.encode(s)
 decode = lambda l: enc.decode(l)
 
 def respond(input, samples): # generation function
+    if ans_long == True:
+      max_new_tokens=150
+    else
+      max_new_tokens=50
     x = (torch.tensor(encode(input), dtype=torch.long, device=device)[None, ...]) 
     with torch.no_grad():
         with ctx:
