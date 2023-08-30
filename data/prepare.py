@@ -33,9 +33,17 @@ def split_file(filename, output_dir, chunk_size):
 
     chunk_lines = lines[start:end]
 
-    output_filename = os.path.join(output_dir, f'{i}-dataset.txt')
+    output_filename = os.path.join(output_dir, f'{i+10}-dataset.txt') # keep double digit
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
+
+def count_txt_files(directory):
+  txt_files = os.listdir(directory)
+  count = 0
+  for file in txt_files:
+    if file.endswith(".txt"):
+      count += 1
+  return count
 
 split_file('dataset.txt', 'output', 100000)
 
@@ -49,13 +57,14 @@ def is_numbers(string):
     return False
 
 for filename in os.listdir('output'):
+  count = int(count_txt_files("output"))
   if filename.endswith('.txt'):
     if is_numbers(filename) == True:
-      if int(filename[:2]) < 48:
+      if int(filename[:2]) <= count:
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         train_ids = train_ids+enc.encode_ordinary(data)
-      if int(filename[:2]) > 48:
+      if int(filename[:2]) > count:
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         val_ids = val_ids+enc.encode_ordinary(data)
