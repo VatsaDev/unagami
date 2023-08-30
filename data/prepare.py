@@ -45,7 +45,7 @@ def count_txt_files(directory):
       count += 1
   return count
 
-split_file('dataset.txt', 'output', 100000)
+split_file('dataset.txt', 'data/output', 100000)
 
 def is_numbers(string):
   two_chars = string[:2]
