@@ -56,8 +56,8 @@ def is_numbers(string):
   except ValueError:
     return False
 
-for filename in os.listdir('output'):
-  count = int(count_txt_files("output"))
+for filename in os.listdir('data/output'):
+  count = int(count_txt_files("data/output"))
   if filename.endswith('.txt'):
     if is_numbers(filename) == True:
       if int(filename[:2]) <= int(count*0.9):
