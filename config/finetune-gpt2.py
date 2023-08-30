@@ -7,7 +7,7 @@ wandb_log = False # feel free to turn on
 wandb_project = 'gpt2finetune'
 wandb_run_name = 'ft-' + str(time.time())
 
-dataset = 'output'
+dataset = 'data'
 init_from = 'gpt2-medium' # this is the smallest GPT-2 model, good for google colab
 
 # only save checkpoints if the validation loss improves
