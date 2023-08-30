@@ -89,7 +89,7 @@ decode = lambda l: enc.decode(l)
 def respond(input, samples): # generation function
     if ans_long == True:
       max_new_tokens=150
-    else
+    else:
       max_new_tokens=50
     x = (torch.tensor(encode(input), dtype=torch.long, device=device)[None, ...]) 
     with torch.no_grad():
