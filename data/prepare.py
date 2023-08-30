@@ -39,7 +39,7 @@ def split_file(filename, output_dir, chunk_size):
 
 def count_txt_files(directory):
   txt_files = os.listdir(directory)
-  count = 0
+  count = 10
   for file in txt_files:
     if file.endswith(".txt"):
       count += 1
@@ -60,11 +60,11 @@ for filename in os.listdir('output'):
   count = int(count_txt_files("output"))
   if filename.endswith('.txt'):
     if is_numbers(filename) == True:
-      if int(filename[:2]) <= count:
+      if int(filename[:2]) <= int(count*0.9):
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         train_ids = train_ids+enc.encode_ordinary(data)
-      if int(filename[:2]) > count:
+      if int(filename[:2]) > int(count*0.9):
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         val_ids = val_ids+enc.encode_ordinary(data)
