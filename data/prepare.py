@@ -61,11 +61,11 @@ for filename in os.listdir('data/output'):
   if filename.endswith('.txt'):
     if is_numbers(filename) == True:
       if int(filename[:2]) <= int(count*0.9):
-        with open(f'output/{filename}', 'r') as f:
+        with open(f'data/output/{filename}', 'r') as f:
           data = f.read()
         train_ids = train_ids+enc.encode_ordinary(data)
       if int(filename[:2]) > int(count*0.9):
-        with open(f'output/{filename}', 'r') as f:
+        with open(f'data/output/{filename}', 'r') as f:
           data = f.read()
         val_ids = val_ids+enc.encode_ordinary(data)
 
