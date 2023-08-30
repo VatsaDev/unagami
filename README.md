@@ -24,10 +24,12 @@ Format inspired by `oasst-pythia-12b`
 ```
 
 ## Problems / TODOs
-   **TODO**
+   - more data
+     - need more data
    
 ### whats in the data
- **TODO**
+ - oasst/oasst-1
+ - eluthierAI/arithmetic
 
 ## Limitations 
 
