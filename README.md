@@ -3,7 +3,7 @@
 
 The next AI model after NanoChatGPT, this model is meant for more informational capabilities, closer to a mainstream LLM
 
-**Add updates.md**
+all updates at [updates.md](https://github.com/VatsaDev/unagami/blob/main/updates.md)   
 **Add Colab link**      
 
 ## Features
