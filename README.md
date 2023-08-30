@@ -14,6 +14,7 @@ The next AI model after NanoChatGPT, this model is meant for more informational 
 
 Format inspired by `oasst-pythia-12b` 
 ```
+<system> ... <endOfText>
 <human> ... <endOfText>
 <Bot> ... <endOfText>
 <human> ... <endOfText>
