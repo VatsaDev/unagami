@@ -47,18 +47,27 @@ def is_numbers(string):
     return True
   except ValueError:
     return False
+def get_num_txt_files(output_dir):
+  num_txt_files = 0
+  for filename in os.listdir(output_dir):
+    if filename.endswith('.txt'):
+      num_txt_files += 1
+  return num_txt_files
+
 
 for filename in os.listdir('output'):
   if filename.endswith('.txt'):
     if is_numbers(filename) == True:
-      if int(filename[:2]) < 48:
+      if int(filename[:2]) < get_num_txt_files(output_dir)*0.9:
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         train_ids = train_ids+enc.encode_ordinary(data)
-      if int(filename[:2]) > 48:
+        print(f"train has {len(train_ids):,} tokens")
+      if int(filename[:2]) > get_num_txt_files(output_dir)*0.9:
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         val_ids = val_ids+enc.encode_ordinary(data)
+        print(f"val has {len(val_ids):,} tokens")
 
 print(f"train has {len(train_ids):,} tokens")
 print(f"val has {len(val_ids):,} tokens")
