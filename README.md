@@ -55,4 +55,11 @@ I did not make the data dumps/corpuses that make up this data, and can't account
       archivePrefix={arXiv},
       primaryClass={cs.AI}
 }
+
+@article{platypus2023,
+    title={Platypus: Quick, Cheap, and Powerful Refinement of LLMs}, 
+    author={Ariel N. Lee and Cole J. Hunter and Nataniel Ruiz},
+    booktitle={arXiv preprint arxiv:2308.07317},
+    year={2023}
+}
 ```
