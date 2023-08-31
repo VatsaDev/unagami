@@ -52,7 +52,7 @@ if init_from == 'huggingface':
     model.load_state_dict(state_dict) 
   else:
     # init from huggingface model
-    download_ckpt('https://huggingface.co/VatsaDev/ChatGpt-nano/resolve/main/ckpt.pt')
+    download_ckpt('https://huggingface.co/VatsaDev/unagami/resolve/main/ckpt.pt')
     ckpt_path = 'ckpt.pt'
     checkpoint = torch.load(ckpt_path, map_location=device)
     gptconf = GPTConfig(**checkpoint['model_args'])
