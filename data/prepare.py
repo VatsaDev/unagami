@@ -16,7 +16,7 @@ def download_file(url):
   else:
     print('Error downloading file:', response.status_code)
 
-download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/data.txt')
+download_file('https://huggingface.co/VatsaDev/ChatGpt-nano/resolve/main/Dataset.txt')
 
 
 def split_file(filename, output_dir, chunk_size):
@@ -33,19 +33,11 @@ def split_file(filename, output_dir, chunk_size):
 
     chunk_lines = lines[start:end]
 
-    output_filename = os.path.join(output_dir, f'{i+10}dataset.txt') # keep double digit
+    output_filename = os.path.join(output_dir, f'{i+10}-dataset.txt')
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
-def count_txt_files(directory):
-  txt_files = os.listdir(directory)
-  count = 10
-  for file in txt_files:
-    if file.endswith(".txt"):
-      count += 1
-  return count
-
-split_file('dataset.txt', 'data/output', 100000)
+split_file('dataset.txt', 'output', 1000)
 
 def is_numbers(string):
   two_chars = string[:2]
@@ -55,19 +47,30 @@ def is_numbers(string):
     return True
   except ValueError:
     return False
+    
+def get_num_txt_files(output_dir):
+  num_txt_files = 0
+  for filename in os.listdir(output_dir):
+    if filename.endswith('.txt'):
+      num_txt_files += 1
+    print(f"there are {num_txt_files} text files")
+  return num_txt_files
 
-for filename in os.listdir('data/output'):
-  count = int(count_txt_files("data/output"))
+num_files = get_num_txt_files("output"):
+
+for filename in os.listdir('output'):
   if filename.endswith('.txt'):
     if is_numbers(filename) == True:
-      if int(filename[:2]) <= int(count*0.9):
-        with open(f'data/output/{filename}', 'r') as f:
+      if int(filename[:2]) < num_files*0.9:
+        with open(f'output/{filename}', 'r') as f:
           data = f.read()
         train_ids = train_ids+enc.encode_ordinary(data)
-      if int(filename[:2]) > int(count*0.9):
-        with open(f'data/output/{filename}', 'r') as f:
+        print(f"train has {len(train_ids):,} tokens")
+      if int(filename[:2]) > num_files*0.9:
+        with open(f'output/{filename}', 'r') as f:
           data = f.read()
         val_ids = val_ids+enc.encode_ordinary(data)
+        print(f"val has {len(val_ids):,} tokens")
 
 print(f"train has {len(train_ids):,} tokens")
 print(f"val has {len(val_ids):,} tokens")
@@ -75,4 +78,3 @@ train_ids = np.array(train_ids, dtype=np.uint16)
 val_ids = np.array(val_ids, dtype=np.uint16)
 train_ids.tofile(os.path.join(os.path.dirname(__file__), 'train.bin'))
 val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
-
