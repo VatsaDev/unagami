@@ -8,7 +8,7 @@ import requests
 
 # -----------------------------------------------------------------------------
 init_from = 'resume'
-out_dir = 'out-chat' # where finetuned model lives
+out_dir = '/content/drive/MyDrive/Model' # where finetuned model lives
 num_samples = 1 # no samples. 1 for 1 chat at a time
 max_new_tokens = 150
 ans_long=True
