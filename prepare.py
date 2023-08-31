@@ -56,16 +56,17 @@ def get_num_txt_files(output_dir):
     print(f"there are {num_txt_files} text files")
   return num_txt_files
 
+num_files = get_num_txt_files("output"):
 
 for filename in os.listdir('output'):
   if filename.endswith('.txt'):
     if is_numbers(filename) == True:
-      if int(filename[:2]) < get_num_txt_files(output_dir)*0.9:
+      if int(filename[:2]) < num_files*0.9:
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         train_ids = train_ids+enc.encode_ordinary(data)
         print(f"train has {len(train_ids):,} tokens")
-      if int(filename[:2]) > get_num_txt_files(output_dir)*0.9:
+      if int(filename[:2]) > num_files*0.9:
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         val_ids = val_ids+enc.encode_ordinary(data)
