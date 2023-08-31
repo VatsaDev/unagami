@@ -56,7 +56,7 @@ def get_num_txt_files(output_dir):
     print(f"there are {num_txt_files} text files")
   return num_txt_files
 
-num_files = get_num_txt_files("output"):
+num_files = get_num_txt_files("output")
 
 for filename in os.listdir('output'):
   if filename.endswith('.txt'):
