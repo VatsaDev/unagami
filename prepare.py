@@ -47,11 +47,13 @@ def is_numbers(string):
     return True
   except ValueError:
     return False
+    
 def get_num_txt_files(output_dir):
   num_txt_files = 0
   for filename in os.listdir(output_dir):
     if filename.endswith('.txt'):
       num_txt_files += 1
+    print(f"there are {num_txt_files} text files")
   return num_txt_files
 
 
