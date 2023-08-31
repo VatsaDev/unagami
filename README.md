@@ -63,4 +63,13 @@ I did not make the data dumps/corpuses that make up this data, and can't account
     booktitle={arXiv preprint arxiv:2308.07317},
     year={2023}
 }
+
+@misc{OpenOrca,
+  title = {OpenOrca: An Open Dataset of GPT Augmented FLAN Reasoning Traces},
+  author = {Wing Lian and Bleys Goodson and Eugene Pentland and Austin Cook and Chanvichet Vong and "Teknium"},
+  year = {2023},
+  publisher = {HuggingFace},
+  journal = {HuggingFace repository},
+  howpublished = {\url{https://https://huggingface.co/Open-Orca/OpenOrca},
+}
 ```
