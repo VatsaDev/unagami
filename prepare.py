@@ -33,7 +33,7 @@ def split_file(filename, output_dir, chunk_size):
 
     chunk_lines = lines[start:end]
 
-    output_filename = os.path.join(output_dir, f'{i}-dataset.txt')
+    output_filename = os.path.join(output_dir, f'{i+10}-dataset.txt')
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
