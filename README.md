@@ -31,6 +31,7 @@ Format inspired by `oasst-pythia-12b`
  - oasst/oasst-1
  - eluthierAI/arithmetic
  - camel-ai/math
+ - garage-bAInd/Open-Platypus
 
 #### Limitations 
 
