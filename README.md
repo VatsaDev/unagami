@@ -30,6 +30,7 @@ Format inspired by `oasst-pythia-12b`
 ## whats in the data
  - oasst/oasst-1
  - eluthierAI/arithmetic
+ - camel-ai/math
 
 #### Limitations 
 
