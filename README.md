@@ -45,4 +45,13 @@ I did not make the data dumps/corpuses that make up this data, and can't account
     archivePrefix={arXiv},
     primaryClass={cs.CL}
 }
+
+@misc{li2023camel,
+      title={CAMEL: Communicative Agents for "Mind" Exploration of Large Scale Language Model Society}, 
+      author={Guohao Li and Hasan Abed Al Kader Hammoud and Hani Itani and Dmitrii Khizbullin and Bernard Ghanem},
+      year={2023},
+      eprint={2303.17760},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI}
+}
 ```
