@@ -65,12 +65,10 @@ for filename in os.listdir('output'):
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         train_ids = train_ids+enc.encode_ordinary(data)
-        print(f"train has {len(train_ids):,} tokens")
       if int(filename[:2]) > num_files*0.9:
         with open(f'output/{filename}', 'r') as f:
           data = f.read()
         val_ids = val_ids+enc.encode_ordinary(data)
-        print(f"val has {len(val_ids):,} tokens")
 
 print(f"train has {len(train_ids):,} tokens")
 print(f"val has {len(val_ids):,} tokens")
