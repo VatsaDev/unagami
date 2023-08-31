@@ -7,7 +7,9 @@ all updates at [updates.md](https://github.com/VatsaDev/unagami/blob/main/update
 **Add Colab link**      
 
 ## Features
- - speaks several, proper informative sentences. 
+ - speaks several, proper informative sentences on multiple topics.
+ - 2GB dataset
+ - rudimentary system prompt
 
 
 ## how does it work?
