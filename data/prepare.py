@@ -37,7 +37,7 @@ def split_file(filename, output_dir, chunk_size):
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
-split_file('dataset.txt', 'output', 20000)
+split_file('dataset.txt', 'output', 10000)
 
 def is_numbers(string):
   two_chars = string[:2]
@@ -53,7 +53,6 @@ def get_num_txt_files(output_dir):
   for filename in os.listdir(output_dir):
     if filename.endswith('.txt'):
       num_txt_files += 1
-    print(f"there are {num_txt_files} text files")
   return num_txt_files
 
 num_files = get_num_txt_files("output")
