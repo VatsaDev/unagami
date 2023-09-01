@@ -38,7 +38,7 @@ def split_file(filename, output_dir, chunk_size):
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
-split_file('dataset.txt', 'output', 20000)
+split_file('dataset.txt', 'output', 50000)
 
 for filename in os.listdir('output'): #blocks are chosen randomly from the text, more of a seamless train val split
   if filename.endswith('.txt'):
