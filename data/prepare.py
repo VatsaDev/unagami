@@ -37,7 +37,7 @@ def split_file(filename, output_dir, chunk_size):
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
-split_file('dataset.txt', 'output', 1000)
+split_file('dataset.txt', 'output', 10000)
 
 def is_numbers(string):
   two_chars = string[:2]
