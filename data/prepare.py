@@ -16,7 +16,7 @@ def download_file(url):
   else:
     print('Error downloading file:', response.status_code)
 
-download_file('https://huggingface.co/VatsaDev/ChatGpt-nano/resolve/main/Dataset.txt')
+download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/data.txt')
 
 
 def split_file(filename, output_dir, chunk_size):
