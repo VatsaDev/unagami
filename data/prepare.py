@@ -52,7 +52,7 @@ def extract_numbers(file_name):
     if not file_name[i].isdigit():
       end_index = i
       break
-  print(start_index:end_index)
+  print(file_name[start_index:end_index])
   return file_name[start_index:end_index]
     
 def get_num_txt_files(output_dir):
