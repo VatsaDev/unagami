@@ -33,7 +33,7 @@ def split_file(filename, output_dir, chunk_size):
 
     chunk_lines = lines[start:end]
 
-    output_filename = os.path.join(output_dir, f'{i+10}-dataset.txt')
+    output_filename = os.path.join(output_dir, f'{i}-dataset.txt')
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
@@ -52,7 +52,7 @@ def extract_numbers(file_name):
     if not file_name[i].isdigit():
       end_index = i
       break
-
+  print(start_index:end_index)
   return file_name[start_index:end_index]
     
 def get_num_txt_files(output_dir):
