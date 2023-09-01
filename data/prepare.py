@@ -47,10 +47,12 @@ for filename in os.listdir('output'): #blocks are chosen randomly from the text,
       with open(f'output/{filename}', 'r') as f:
         data = f.read()
       train_ids = train_ids+enc.encode_ordinary(data)
+      print(f"train has {len(train_ids):,} tokens")
     if train_or_val > 8:
       with open(f'output/{filename}', 'r') as f:
         data = f.read()
       val_ids = val_ids+enc.encode_ordinary(data)
+      print(f"val has {len(val_ids):,} tokens")
 
 print(f"train has {len(train_ids):,} tokens")
 print(f"val has {len(val_ids):,} tokens")
