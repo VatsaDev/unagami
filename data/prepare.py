@@ -37,16 +37,23 @@ def split_file(filename, output_dir, chunk_size):
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
-split_file('dataset.txt', 'output', 10000)
+split_file('dataset.txt', 'output', 20000)
 
-def is_numbers(string):
-  two_chars = string[:2]
+def extract_numbers(file_name):
+  start_index = 0
+  end_index = 0
 
-  try:
-    int(two_chars)
-    return True
-  except ValueError:
-    return False
+  for i in range(len(file_name)):
+    if not file_name[i].isdigit():
+      start_index = i
+      break
+
+  for i in range(start_index + 1, len(file_name)):
+    if not file_name[i].isdigit():
+      end_index = i
+      break
+
+  return file_name[start_index:end_index]
     
 def get_num_txt_files(output_dir):
   num_txt_files = 0
@@ -59,15 +66,14 @@ num_files = get_num_txt_files("output")
 
 for filename in os.listdir('output'):
   if filename.endswith('.txt'):
-    if is_numbers(filename) == True:
-      if int(filename[:2]) < num_files*0.9:
-        with open(f'output/{filename}', 'r') as f:
-          data = f.read()
-        train_ids = train_ids+enc.encode_ordinary(data)
-      if int(filename[:2]) > num_files*0.9:
-        with open(f'output/{filename}', 'r') as f:
-          data = f.read()
-        val_ids = val_ids+enc.encode_ordinary(data)
+    if int(extract_numbers(filename)) < num_files*0.9:
+      with open(f'output/{filename}', 'r') as f:
+        data = f.read()
+      train_ids = train_ids+enc.encode_ordinary(data)
+    if int(extract_numbers(filename)) > num_files*0.9:
+      with open(f'output/{filename}', 'r') as f:
+        data = f.read()
+      val_ids = val_ids+enc.encode_ordinary(data)
 
 print(f"train has {len(train_ids):,} tokens")
 print(f"val has {len(val_ids):,} tokens")
