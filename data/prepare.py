@@ -1,4 +1,5 @@
 import os
+import random
 import requests
 import tiktoken
 import numpy as np
@@ -39,38 +40,14 @@ def split_file(filename, output_dir, chunk_size):
 
 split_file('dataset.txt', 'output', 20000)
 
-def extract_numbers(file_name):
-  start_index = 0
-  end_index = 0
-
-  for i in range(len(file_name)):
-    if not file_name[i].isdigit():
-      start_index = i
-      break
-
-  for i in range(start_index + 1, len(file_name)):
-    if not file_name[i].isdigit():
-      end_index = i
-      break
-  print(file_name[start_index:end_index])
-  return file_name[start_index:end_index]
-    
-def get_num_txt_files(output_dir):
-  num_txt_files = 0
-  for filename in os.listdir(output_dir):
-    if filename.endswith('.txt'):
-      num_txt_files += 1
-  return num_txt_files
-
-num_files = get_num_txt_files("output")
-
-for filename in os.listdir('output'):
+for filename in os.listdir('output'): #blocks are chosen randomly from the text, more of a seamless train val split
   if filename.endswith('.txt'):
-    if int(extract_numbers(filename)) < num_files*0.9:
+    train_or_val = random.randint(0, 9)
+    if train_or_val <= 8:
       with open(f'output/{filename}', 'r') as f:
         data = f.read()
       train_ids = train_ids+enc.encode_ordinary(data)
-    if int(extract_numbers(filename)) > num_files*0.9:
+    if train_or_val > 8:
       with open(f'output/{filename}', 'r') as f:
         data = f.read()
       val_ids = val_ids+enc.encode_ordinary(data)
