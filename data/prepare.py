@@ -51,6 +51,7 @@ for filename in os.listdir('output'): #blocks are chosen randomly from the text,
         data = f.read()
       train_ids = enc.encode_ordinary(data)
       train_len = train_len+len(train_ids):
+      train_ids = np.array(train_ids, dtype=np.uint16)
       train_ids.tofile(os.path.join(os.path.dirname(__file__), 'train.bin'))
       print(f"train has {train_len} tokens")
       train_ids = []
@@ -59,6 +60,7 @@ for filename in os.listdir('output'): #blocks are chosen randomly from the text,
         data = f.read()
       val_ids = enc.encode_ordinary(data)
       val_len = val_len+len(val_ids):
+      val_ids = np.array(val_ids, dtype=np.uint16)
       val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
       print(f"val has {val_len} tokens")
       val_ids = []
