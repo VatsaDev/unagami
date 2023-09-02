@@ -40,23 +40,25 @@ def split_file(filename, output_dir, chunk_size):
 
 split_file('dataset.txt', 'output', 50000)
 
+train_len = 0
+val_len = 0
+
 for filename in os.listdir('output'): #blocks are chosen randomly from the text, more of a seamless train val split
   if filename.endswith('.txt'):
     train_or_val = random.randint(0, 9)
     if train_or_val <= 8:
       with open(f'output/{filename}', 'r') as f:
         data = f.read()
-      train_ids = train_ids+enc.encode_ordinary(data)
+      train_ids = enc.encode_ordinary(data)
+      train_len = train_len+len(train_ids):
+      train_ids.tofile(os.path.join(os.path.dirname(__file__), 'train.bin'))
       print(f"train has {len(train_ids):,} tokens")
+      train_ids = []
     if train_or_val > 8:
       with open(f'output/{filename}', 'r') as f:
         data = f.read()
-      val_ids = val_ids+enc.encode_ordinary(data)
+      val_ids = enc.encode_ordinary(data)
+      val_len = val_len+len(val_ids):
+      val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
       print(f"val has {len(val_ids):,} tokens")
-
-print(f"train has {len(train_ids):,} tokens")
-print(f"val has {len(val_ids):,} tokens")
-train_ids = np.array(train_ids, dtype=np.uint16)
-val_ids = np.array(val_ids, dtype=np.uint16)
-train_ids.tofile(os.path.join(os.path.dirname(__file__), 'train.bin'))
-val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
+      val_ids = []
