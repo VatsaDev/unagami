@@ -123,6 +123,8 @@ total_train_data=np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.ui
 total_val_data=np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
 
 def concat_bins():
+    global total_val_data
+    global total_train_data
     for filename in os.listdir('data'):
       if filename.endswith('.bin'):
         if filename[:3] == 'val':
@@ -137,7 +139,7 @@ def concat_bins():
             # Train files
             print(filename)
             train_data = np.memmap(os.path.join(data_dir, filename), dtype=np.uint16, mode='r')
-            total_train_data = np.concatenate([total_val_data, val_data])
+            total_train_data = np.concatenate([total_train_data, train_data])
             del train_data
             total_train_data.flush()
             total_train_data.close()
