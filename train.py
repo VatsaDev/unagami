@@ -122,6 +122,7 @@ def concat_bins():
         # Do something with the bin file
         print(bin_file)
 
+concat_bins()
 train_data = np.memmap(os.path.join(data_dir, 'train1.bin'), dtype=np.uint16, mode='r')
 val_data = np.memmap(os.path.join(data_dir, 'val1.bin'), dtype=np.uint16, mode='r')
 def get_batch(split): # change to use train data and val data from concat_bins
