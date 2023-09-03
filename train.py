@@ -111,11 +111,20 @@ device_type = 'cuda' if 'cuda' in device else 'cpu' # for later use in torch.aut
 ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torch.float16}[dtype]
 ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)
 
-# poor man's data loader
+# data loader
+train_data=[]
+val_data=[]
 data_dir = os.path.join('data', dataset)
-train_data = np.memmap(os.path.join(data_dir, 'train.bin'), dtype=np.uint16, mode='r')
-val_data = np.memmap(os.path.join(data_dir, 'val.bin'), dtype=np.uint16, mode='r')
-def get_batch(split):
+
+def concat_bins():
+    bin_files = [file for file in data_dir if file.endswith(".bin")]
+    for bin_file in bin_files:
+        # Do something with the bin file
+        print(bin_file)
+
+train_data = np.memmap(os.path.join(data_dir, 'train1.bin'), dtype=np.uint16, mode='r')
+val_data = np.memmap(os.path.join(data_dir, 'val1.bin'), dtype=np.uint16, mode='r')
+def get_batch(split): # change to use train data and val data from concat_bins
     data = train_data if split == 'train' else val_data
     ix = torch.randint(len(data) - block_size, (batch_size,))
     x = torch.stack([torch.from_numpy((data[i:i+block_size]).astype(np.int64)) for i in ix])
