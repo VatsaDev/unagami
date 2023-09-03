@@ -42,7 +42,8 @@ split_file('dataset.txt', 'output', 50000)
 
 train_len = 0
 val_len = 0
-
+train_no = 0
+val_no = 0
 for filename in os.listdir('output'): #blocks are chosen randomly from the text, more of a seamless train val split
   if filename.endswith('.txt'):
     train_or_val = random.randint(0, 9)
@@ -52,7 +53,8 @@ for filename in os.listdir('output'): #blocks are chosen randomly from the text,
       train_ids = enc.encode_ordinary(data)
       train_len = train_len+len(train_ids)
       train_ids = np.array(train_ids, dtype=np.uint16)
-      train_ids.tofile(os.path.join(os.path.dirname(__file__), 'train.bin'))
+      train_no = train_no+1
+      train_ids.tofile(os.path.join(os.path.dirname(__file__), f'train{train_no}.bin'))
       print(f"train has {train_len} tokens")
       train_ids = []
     if train_or_val > 8:
@@ -61,6 +63,7 @@ for filename in os.listdir('output'): #blocks are chosen randomly from the text,
       val_ids = enc.encode_ordinary(data)
       val_len = val_len+len(val_ids)
       val_ids = np.array(val_ids, dtype=np.uint16)
-      val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
+      val_no = val_no+1
+      val_ids.tofile(os.path.join(os.path.dirname(__file__), f'val{val_no}.bin'))
       print(f"val has {val_len} tokens")
       val_ids = []
