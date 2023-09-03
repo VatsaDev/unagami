@@ -115,8 +115,7 @@ def respond(input, samples): # generation function
                 # replace context
                 out = output.replace(input,'')
                 # remove any extra system response
-                out = remov_sys(out)
-                print(f"remove sys: {out}")
+                out=out.partition('<system>')
                 # remove any human response
                 out =  out.partition('<human>')
                 # if the bot has anything left afterwards, the endOfText token is put to use
