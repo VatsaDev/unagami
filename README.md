@@ -8,7 +8,7 @@ all updates at [updates.md](https://github.com/VatsaDev/unagami/blob/main/update
 ## Features
  - speaks several, proper informative sentences on multiple topics.
  - 2GB dataset
- - rudimentary system prompt
+ - System prompt
 
 
 ## how does it work?
