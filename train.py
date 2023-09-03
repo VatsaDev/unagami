@@ -116,6 +116,16 @@ train_data=[]
 val_data=[]
 data_dir = os.path.join('data', dataset)
 concat_dir = "/content/unagami/data"
+
+def concat_bins():
+    bin_files = [file for file in os.path.join(data_dir, 'train1.bin') if file.endswith(".bin")]
+    for filename in os.listdir('data'): #blocks are chosen randomly from the text, more of a seamless train val split
+      if filename.endswith('.bin'):
+        # Do something with the bin file
+        print(bin_file)
+    print("concat over")
+
+concat_bins()   
     
 train_data = np.memmap(os.path.join(data_dir, 'train1.bin'), dtype=np.uint16, mode='r')
 val_data = np.memmap(os.path.join(data_dir, 'val1.bin'), dtype=np.uint16, mode='r')
