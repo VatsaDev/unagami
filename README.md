@@ -25,15 +25,19 @@ Format inspired by `oasst-pythia-12b`
 ```
 
 ## Problems / TODOs
-   - more data
-     - need more data
+   - More Data
+     - need more data, tends to imporve every time
+   - Better Math, and programming skills
+     - Needs better abilities at math and programming
+   - Basic self awareness/naming
+     - need to change up data to make the model refer to itself with a name
    
 ## whats in the data
  - oasst/oasst-1
  - eluthierAI/arithmetic
  - camel-ai/math
  - garage-bAInd/Open-Platypus
- - openorca/orcachat
+ - openorca/openorca
 
 #### Limitations 
 
