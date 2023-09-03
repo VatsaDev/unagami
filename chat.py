@@ -114,8 +114,8 @@ while True:
     context=context+start
     
     out = respond(context, num_samples)
-		# sanitation
-  	# replace context
+    # sanitation
+    # replace context
     #out = out.replace(input,'')
     # remove any human response
     #out =  out.partition('<human>')
