@@ -115,9 +115,10 @@ ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=
 train_data=[]
 val_data=[]
 data_dir = os.path.join('data', dataset)
+concat_dir = "/content/unagami/data"
 
 def concat_bins():
-    bin_files = [file for file in data_dir if file.endswith(".bin")]
+    bin_files = [file for file in concat_dir if file.endswith(".bin")]
     for bin_file in bin_files:
         # Do something with the bin file
         print(bin_file)
