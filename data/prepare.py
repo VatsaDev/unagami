@@ -67,3 +67,4 @@ for filename in os.listdir('output'): #blocks are chosen randomly from the text,
       val_ids.tofile(os.path.join(os.path.dirname(__file__), f'val{val_no}.bin'))
       print(f"val has {val_len} tokens")
       val_ids = []
+
