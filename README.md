@@ -33,6 +33,7 @@ Format inspired by `oasst-pythia-12b`
  - eluthierAI/arithmetic
  - camel-ai/math
  - garage-bAInd/Open-Platypus
+ - openorca/orcachat
 
 #### Limitations 
 
