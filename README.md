@@ -27,10 +27,12 @@ Format inspired by `oasst-pythia-12b`
 ## Problems / TODOs
    - More Data
      - need more data, tends to imporve every time
-   - Better Math, and programming skills
-     - Needs better abilities at math and programming
+   - Better Math, and programming skills, and logical reasoning
+     - While better than NanoChatGPT, still nneds better abilities at math, programming, and logical reasoning 
    - Basic self awareness/naming
      - need to change up data to make the model refer to itself with a name
+   - Summary and translations
+  		 - While The model is getting better at staying on topic and summarzing, it still needs work, and the translations it makes are weak.
    
 ## whats in the data
  - oasst/oasst-1
