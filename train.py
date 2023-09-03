@@ -113,8 +113,8 @@ ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=
 
 # data loader
 data_dir = os.path.join('data', dataset)
-total_train_data=[]
-total_val_data=[]
+total_train_data=[10] # just keeping arrays not empty
+total_val_data=[10]
 total_train_data=np.array(total_train_data, dtype=np.uint16)
 total_val_data=np.array(total_val_data, dtype=np.uint16)
 total_train_data.tofile('/content/unagami/data/traintotal.bin')
