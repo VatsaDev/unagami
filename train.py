@@ -122,7 +122,7 @@ def concat_bins():
     for filename in os.listdir('data'): #blocks are chosen randomly from the text, more of a seamless train val split
       if filename.endswith('.bin'):
         # Do something with the bin file
-        print(bin_file)
+        print(filename)
     print("concat over")
 
 concat_bins()   
