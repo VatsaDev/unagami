@@ -17,8 +17,7 @@ top_k = 10 # retain only the top_k most likely tokens, clamp others to have 0 pr
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', etc.
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32' or 'bfloat16' or 'float16'
 compile = True # use PyTorch 2.0 to compile the model to be faster
-context="" # a context var
-system_prompt="<system>You are an AI assistant named UNAGAMI, designed to help users<endOfText>"
+context="<system>You are an AI assistant named UNAGAMI, designed to help users<endOfText>"
 exec(open('configurator.py').read()) # overrides from command line
 # -----------------------------------------------------------------------------
 
@@ -87,7 +86,7 @@ enc = tiktoken.get_encoding("gpt2")
 encode = lambda s: enc.encode(s)
 decode = lambda l: enc.decode(l)
 
-def respond(input,system, samples): # generation function
+def respond(input, samples): # generation function
     if ans_long == True:
       max_new_tokens=150
     else:
@@ -114,7 +113,7 @@ while True:
     # context
     context=context+start
     
-    out = respond(context,system_prompt, num_samples)
+    out = respond(context, num_samples)
 		# sanitation
   	# replace context
     #out = out.replace(input,'')
@@ -128,4 +127,4 @@ while True:
     #output_text = output_text.replace('<bot>',' ')
     #output_text = output_text.replace('<endOfText>',' ')
     #context=context+output_text+'<endOfText>'
-    print('Bot: '+ output_text)
+    print('Bot: '+ out)
