@@ -98,6 +98,11 @@ def respond(input, samples): # generation function
                 generated = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
                 output = decode(generated[0].tolist())
 
+                # gen sample
+                print("--------------------")
+                print(output)
+                print("--------------------")
+
                 # replace context
                 output = output.replace(input,'')
                 # remove any human response
