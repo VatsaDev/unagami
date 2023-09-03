@@ -112,6 +112,7 @@ ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torc
 ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)
 
 # data loader
+data_dir = os.path.join('data', dataset)
 total_train_data=[]
 total_val_data=[]
 total_train_data=np.array(total_train_data, dtype=np.uint16)
@@ -120,8 +121,6 @@ total_train_data.tofile('/content/unagami/data/traintotal.bin')
 total_val_data.tofile('/content/unagami/data/valtotal.bin')
 total_train_data=np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
 total_val_data=np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
-data_dir = os.path.join('data', dataset)
-concat_dir = "/content/unagami/data"
 
 def concat_bins():
     for filename in os.listdir('data'):
