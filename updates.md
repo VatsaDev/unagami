@@ -47,3 +47,5 @@ Bot: The badger is an animal. It is a small mammal, with a long, sharp snout. It
 User: Hmm thanks for everything, I have to leave now
 Bot: No problem, I am happy to help you. 
 ```
+
+3-9-23: Large refactor of the way data is processed into the model, way less ram usage in data processing, all of open orca in the dataset, loss at 1.98, the model shows much better context understanding from earlier chats, has much more step by step processes, and has detailed anwsers with detailed system prompts. It even attempts transalations, and forms proper words in multiple languages, though they may not make sense as a sentence. 
