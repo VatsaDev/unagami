@@ -145,8 +145,8 @@ def concat_bins():
 
 concat_bins()   
     
-train_data = np.memmap(os.path.join(data_dir, 'train1.bin'), dtype=np.uint16, mode='r')
-val_data = np.memmap(os.path.join(data_dir, 'val1.bin'), dtype=np.uint16, mode='r')
+train_data = np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
+val_data = np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
 def get_batch(split): # change to use train data and val data from concat_bins
     data = train_data if split == 'train' else val_data
     ix = torch.randint(len(data) - block_size, (batch_size,))
