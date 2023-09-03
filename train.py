@@ -112,17 +112,36 @@ ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torc
 ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)
 
 # data loader
-train_data=[]
-val_data=[]
+total_train_data=[]
+total_val_data=[]
+total_train_data=np.array(total_train_data, dtype=np.uint16)
+total_val_data=np.array(total_val_data, dtype=np.uint16)
+total_train_data.tofile('/content/data/traintotal.bin'))
+total_val_data.tofile('/content/data/valtotal.bin'))
+total_train_data=np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
+total_val_data=np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
 data_dir = os.path.join('data', dataset)
 concat_dir = "/content/unagami/data"
 
 def concat_bins():
-    bin_files = [file for file in os.path.join(data_dir, 'train1.bin') if file.endswith(".bin")]
-    for filename in os.listdir('data'): #blocks are chosen randomly from the text, more of a seamless train val split
+    for filename in os.listdir('data'):
       if filename.endswith('.bin'):
-        # Do something with the bin file
-        print(filename)
+        if filename[:3] == 'val':
+            # Val files
+            print(filename)
+            val_data = np.memmap(os.path.join(data_dir, filename), dtype=np.uint16, mode='r')
+            total_val_data = np.concatenate([total_val_data, val_data])
+            del val_data
+            total_val_data.flush()
+            total_val_data.close()
+        else:
+            # Train files
+            print(filename)
+            train_data = np.memmap(os.path.join(data_dir, filename), dtype=np.uint16, mode='r')
+            total_train_data = np.concatenate([total_val_data, val_data])
+            del train_data
+            total_train_data.flush()
+            total_train_data.close()
     print("concat over")
 
 concat_bins()   
