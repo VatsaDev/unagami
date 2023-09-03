@@ -86,6 +86,14 @@ enc = tiktoken.get_encoding("gpt2")
 encode = lambda s: enc.encode(s)
 decode = lambda l: enc.decode(l)
 
+
+def remov_sys(text):
+  tok_index = text.find("<system>", text.find("<system>") + 1)
+  if tok_index == -1:
+    return text
+  else:
+    return text[:tok_index]
+
 def respond(input, samples): # generation function
     if ans_long == True:
       max_new_tokens=150
@@ -102,29 +110,32 @@ def respond(input, samples): # generation function
                 print("--------------------")
                 print(output)
                 print("--------------------")
-                return output
+              
+                # sanitation
+                # replace context
+                out = output.replace(input,'')
+                # remove any extra system response
+                out = remov_sys(out)
+                # remove any human response
+                out =  out.partition('<human>')
+                # if the bot has anything left afterwards, the endOfText token is put to use
+                output_text =  out[0].rpartition('<endOftext>')
+                output_text = out[0] + out[1]
+                # label removing
+                output_text = output_text.replace('<human>',' ')
+                output_text = output_text.replace('<bot>',' ')
+                output_text = output_text.replace('<endOfText>',' ')
+                return output_text
 
 # chat loop
 while True:
     # get input from user
     start_input = input('User: ')
     start = '<human>'+start_input+'<endOfText><bot>'
-
-    # context
     context=context+start
     
     out = respond(context, num_samples)
-    # sanitation
-    # replace context
-    #out = out.replace(input,'')
-    # remove any human response
-    #out =  out.partition('<human>')
-    # if the bot has anything left afterwards, the endOfText token is put to use
-    #output_text =  out[0].rpartition('<endOftext>')
-    #output_text = out[0] + out[1]
-    # label removing
-    #output_text = output_text.replace('<human>',' ')
-    #output_text = output_text.replace('<bot>',' ')
-    #output_text = output_text.replace('<endOfText>',' ')
-    #context=context+output_text+'<endOfText>'
+  
+    context=context+out+'<endOfText>'
+  
     print('Bot: '+ out)
