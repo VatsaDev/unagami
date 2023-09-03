@@ -116,8 +116,8 @@ total_train_data=[]
 total_val_data=[]
 total_train_data=np.array(total_train_data, dtype=np.uint16)
 total_val_data=np.array(total_val_data, dtype=np.uint16)
-total_train_data.tofile('/content/data/traintotal.bin'))
-total_val_data.tofile('/content/data/valtotal.bin'))
+total_train_data.tofile('/content/data/traintotal.bin')
+total_val_data.tofile('/content/data/valtotal.bin')
 total_train_data=np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
 total_val_data=np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
 data_dir = os.path.join('data', dataset)
