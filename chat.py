@@ -117,7 +117,7 @@ def respond(input, samples): # generation function
                 # remove any extra system response
                 out=out.partition('<system>')
                 # remove any human response
-                out =  out.partition('<human>')
+                out =  out[0].partition('<human>')
                 # if the bot has anything left afterwards, the endOfText token is put to use
                 output_text =  out[0].rpartition('<endOftext>')
                 output_text = out[0] + out[1]
