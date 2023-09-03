@@ -116,15 +116,7 @@ train_data=[]
 val_data=[]
 data_dir = os.path.join('data', dataset)
 concat_dir = "/content/unagami/data"
-
-def concat_bins():
-    bin_files = [file for file in concat_dir if file.endswith(".bin")]
-    for bin_file in bin_files:
-        # Do something with the bin file
-        print(bin_file)
-    print("concat over")
-
-concat_bins()       
+    
 train_data = np.memmap(os.path.join(data_dir, 'train1.bin'), dtype=np.uint16, mode='r')
 val_data = np.memmap(os.path.join(data_dir, 'val1.bin'), dtype=np.uint16, mode='r')
 def get_batch(split): # change to use train data and val data from concat_bins
@@ -147,7 +139,6 @@ best_val_loss = 1e9
 model_args = dict(n_layer=n_layer, n_head=n_head, n_embd=n_embd, block_size=block_size,
                   bias=bias, vocab_size=None, dropout=dropout) # start with model_args from command line
 if init_from == 'scratch':
-    concat_bins()
     # init a new model from scratch
     print("Initializing a new model from scratch")
     # determine the vocab size we'll use for from-scratch training
@@ -157,7 +148,6 @@ if init_from == 'scratch':
     gptconf = GPTConfig(**model_args)
     model = GPT(gptconf)
 elif init_from == 'resume':
-    concat_bins()
     print(f"Resuming training from {out_dir}")
     # resume training from a checkpoint.
     ckpt_path = os.path.join(out_dir, 'ckpt.pt')
@@ -181,7 +171,6 @@ elif init_from == 'resume':
     iter_num = checkpoint['iter_num']
     best_val_loss = checkpoint['best_val_loss']
 elif init_from.startswith('gpt2'):
-    concat_bins()
     print(f"Initializing from OpenAI GPT-2 weights: {init_from}")
     # initialize from OpenAI GPT-2 weights
     override_args = dict(dropout=dropout)
