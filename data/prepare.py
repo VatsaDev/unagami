@@ -68,3 +68,37 @@ for filename in os.listdir('output'): #blocks are chosen randomly from the text,
       print(f"val has {val_len} tokens")
       val_ids = []
 
+# data loader
+dataset = ''
+data_dir = os.path.join('data', dataset)
+total_train_data=[10] # just keeping arrays not empty
+total_val_data=[10]
+total_train_data=np.array(total_train_data, dtype=np.uint16)
+total_val_data=np.array(total_val_data, dtype=np.uint16)
+total_train_data.tofile('/content/unagami/data/traintotal.bin')
+total_val_data.tofile('/content/unagami/data/valtotal.bin')
+total_train_data=np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
+total_val_data=np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
+
+def concat_bins():
+    global total_val_data
+    global total_train_data
+    for filename in os.listdir('data'):
+      if filename.endswith('.bin'):
+        if filename[:3] == 'val':
+            # Val files
+            print(f"concat {filename}")
+            val_data = np.memmap(os.path.join(data_dir, filename), dtype=np.uint16, mode='r')
+            total_val_data = np.concatenate([total_val_data, val_data])
+            del val_data
+            total_val_data.tofile('/content/unagami/data/valtotal.bin')
+        else:
+            # Train files
+            print(f"concat {filename}")
+            train_data = np.memmap(os.path.join(data_dir, filename), dtype=np.uint16, mode='r')
+            total_train_data = np.concatenate([total_train_data, train_data])
+            del train_data
+            total_train_data.tofile('/content/unagami/data/traintotal.bin')
+    print("concat over")
+
+concat_bins()
