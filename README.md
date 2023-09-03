@@ -1,6 +1,5 @@
-# Unagami
-![image](https://user-images.githubusercontent.com/71975550/264119150-aa059609-6535-4d78-878f-3efbc17f582a.png)
-
+# Unagami!
+![Component 1 (2)](https://github.com/VatsaDev/unagami/assets/71975550/4f1fdab4-216a-4717-bf16-4ef542928408)
 The next AI model after NanoChatGPT, this model is meant for more informational capabilities, closer to a mainstream LLM
 
 all updates at [updates.md](https://github.com/VatsaDev/unagami/blob/main/updates.md)   
