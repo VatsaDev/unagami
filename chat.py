@@ -8,17 +8,18 @@ import requests
 
 # -----------------------------------------------------------------------------
 init_from = 'resume'
-out_dir = '/content/drive/MyDrive/Model' # where finetuned model lives
+out_dir = '/content/drive/MyDrive/Model' # finetuned model directory
 num_samples = 1 # no samples. 1 for 1 chat at a time
 max_new_tokens = 150
 ans_long=True
-temperature = 0.8 
-top_k = 5 # retain only the top_k most likely tokens, clamp others to have 0 probability
+temperature = 0.85 
+top_k = 10 # retain only the top_k most likely tokens, clamp others to have 0 probability
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', etc.
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32' or 'bfloat16' or 'float16'
 compile = True # use PyTorch 2.0 to compile the model to be faster
-context="<system>You are a Helpful AI assistant<endOfText>" # a little context for better chat responses
-exec(open('configurator.py').read()) # overrides from command line, only for out_dir location, if you store the ckpt.pt elsewhere, like gdrive, to escape finetuning everytime you run the colab
+context="" # a context var
+system_prompt="<system>You are an AI assistant named UNAGAMI, designed to help users<endOfText>"
+exec(open('configurator.py').read()) # overrides from command line
 # -----------------------------------------------------------------------------
 
 torch.backends.cuda.matmul.allow_tf32 = True # allow tf32 on matmul
@@ -86,7 +87,7 @@ enc = tiktoken.get_encoding("gpt2")
 encode = lambda s: enc.encode(s)
 decode = lambda l: enc.decode(l)
 
-def respond(input, samples): # generation function
+def respond(input,system, samples): # generation function
     if ans_long == True:
       max_new_tokens=150
     else:
@@ -102,19 +103,7 @@ def respond(input, samples): # generation function
                 print("--------------------")
                 print(output)
                 print("--------------------")
-
-                # replace context
-                output = output.replace(input,'')
-                # remove any human response
-                output =  output.partition('<human>')
-                # if the bot has anything left afterwards, the endOfText token is put to use
-                output_text =  output[0].rpartition('<endOftext>')
-                output_text = output[0] + output[1]
-                # label removing
-                output_text = output_text.replace('<human>',' ')
-                output_text = output_text.replace('<bot>',' ')
-                output_text = output_text.replace('<endOfText>',' ')
-                return output_text
+                return output
 
 # chat loop
 while True:
@@ -125,6 +114,18 @@ while True:
     # context
     context=context+start
     
-    out = respond(context, num_samples)
-    context=context+out+'<endOfText>'
-    print('Bot: '+ out)
+    out = respond(context,system_prompt, num_samples)
+		# sanitation
+  	# replace context
+    #out = out.replace(input,'')
+    # remove any human response
+    #out =  out.partition('<human>')
+    # if the bot has anything left afterwards, the endOfText token is put to use
+    #output_text =  out[0].rpartition('<endOftext>')
+    #output_text = out[0] + out[1]
+    # label removing
+    #output_text = output_text.replace('<human>',' ')
+    #output_text = output_text.replace('<bot>',' ')
+    #output_text = output_text.replace('<endOfText>',' ')
+    #context=context+output_text+'<endOfText>'
+    print('Bot: '+ output_text)
