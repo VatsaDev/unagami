@@ -21,6 +21,7 @@ import time
 import math
 import pickle
 from contextlib import nullcontext
+import requests
 
 import numpy as np
 import torch
