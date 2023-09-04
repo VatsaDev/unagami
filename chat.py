@@ -107,9 +107,9 @@ def respond(input, samples): # generation function
                 output = decode(generated[0].tolist())
 
                 # gen sample
-                print("--------------------")
-                print(output)
-                print("--------------------")
+                #print("--------------------")
+                #print(output)
+                #print("--------------------")
               
                 # sanitation
                 # replace context
