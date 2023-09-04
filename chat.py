@@ -136,6 +136,6 @@ while True:
     
     out = respond(context, num_samples)
   
-    context=context+out+'<endOfText>'
+    context=context+out+'<endOfText><system>You are an AI assistant named UNAGAMI, designed to help users<endOfText>'
   
     print('Bot: '+ out)
