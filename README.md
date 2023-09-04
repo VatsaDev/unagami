@@ -27,9 +27,9 @@ Format inspired by `oasst-pythia-12b`
 
 ## Problems / TODOs
    - More Data
-     - need more data, tends to imporve every time
+     - need more data, tends to improve every time
    - Better Math, and programming skills, and logical reasoning
-     - While better than NanoChatGPT, still nneds better abilities at math, programming, and logical reasoning 
+     - While better than NanoChatGPT, still needs better abilities at math, programming, and logical reasoning 
    - Summary and translations
   		 - While The model is getting better at staying on topic and summarzing, it still needs work, and the translations it makes are weak.
    
@@ -40,6 +40,9 @@ Format inspired by `oasst-pythia-12b`
  - garage-bAInd/Open-Platypus
  - openorca/openorca
  - fnlp/moss-002-sft-data
+ - nomic-ai/gpt-4-all-prompt-gen
+ - databricks/dolly-15k
+ - codeparrot/codeparrot-self-instruct
 
 #### Limitations 
 
