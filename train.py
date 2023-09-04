@@ -72,6 +72,8 @@ backend = 'nccl' # 'nccl', 'gloo', etc.
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
 compile = True # use PyTorch 2.0 to compile the model to be faster
+# get train/val bins off HuggingFace
+hf_binaries=False 
 # -----------------------------------------------------------------------------
 config_keys = [k for k,v in globals().items() if not k.startswith('_') and isinstance(v, (int, float, bool, str))]
 exec(open('configurator.py').read()) # overrides from command line or config file
@@ -111,9 +113,28 @@ device_type = 'cuda' if 'cuda' in device else 'cpu' # for later use in torch.aut
 ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torch.float16}[dtype]
 ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)   
 
+def download_file(url, file_name):
+  response = requests.get(url)
+  if response.status_code == 200:
+    with open(file_name, 'wb') as f:
+      f.write(response.content)
+      print(f"got: {file_name}")
+  else:
+    print('Error downloading file:', response.status_code)
+
 data_dir = os.path.join('data', dataset)
-train_data = np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
-val_data = np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
+
+if hf_binaries == True:
+    print("Using HuggingFace binaries...")
+    download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/trainTotal.bin', 'traintotal.bin')
+    download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/valTotal.bin','valtotal.bin')
+    train_data = np.memmap('traintotal.bin', dtype=np.uint16, mode='r')
+    val_data = np.memmap('valtotal.bin', dtype=np.uint16, mode='r')
+else:
+    print("Using regular binaries...")
+    train_data = np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
+    val_data = np.memmap(os.path.join(data_dir, 'valtotal.bin'), dtype=np.uint16, mode='r')
+
 def get_batch(split): # change to use train data and val data from concat_bins
     data = train_data if split == 'train' else val_data
     ix = torch.randint(len(data) - block_size, (batch_size,))
