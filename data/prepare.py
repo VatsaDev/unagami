@@ -38,7 +38,7 @@ def split_file(filename, output_dir, chunk_size):
     with open(output_filename, 'w') as f:
       f.writelines(chunk_lines)
 
-split_file('dataset.txt', 'output', 50000)
+split_file('dataset.txt', 'output', 80000)
 
 train_len = 0
 val_len = 0
