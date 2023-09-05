@@ -10,6 +10,7 @@ enc = tiktoken.get_encoding("gpt2")
 
 chunk_no=0
 def download_file(url, output_dir):
+  global chunk_no
   if not os.path.exists(output_dir):
     os.mkdir(output_dir)
   
