@@ -121,7 +121,7 @@ def download_file(url, file_name):
       for chunk in response.iter_content(chunk_size=104857600):
         if chunk:
           f.write(chunk)
-        print(f"got: {file_name}")
+    print(f"got: {file_name}")
   else:
     print('Error downloading file:', response.status_code)
 
