@@ -8,7 +8,7 @@ train_ids=[]
 val_ids=[]
 enc = tiktoken.get_encoding("gpt2")
 
-ddef download_file(url):
+def download_file(url):
   response = requests.get(url, stream=True)
   if response.status_code == 200:
     with open('dataset.txt', 'wb') as f:
