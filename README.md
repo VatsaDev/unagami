@@ -7,6 +7,7 @@ all updates at [updates.md](https://github.com/VatsaDev/unagami/blob/main/update
 
 ## Features
  - speaks several, proper informative sentences on multiple topics.
+ - Trained on 5.5 billion tokens
  - 2GB dataset
  - System prompt
  - Sounds Self aware, may often call itself Unagami or call me its developer
