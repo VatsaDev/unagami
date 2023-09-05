@@ -44,6 +44,19 @@ Format inspired by `oasst-pythia-12b`
  - nomic-ai/gpt-4-all-prompt-gen
  - databricks/dolly-15k
  - codeparrot/codeparrot-self-instruct
+ - TheoremQA
+ - zhiqings/dromedary-65b
+ - ArtifactAI/arxiv-math-instruct
+ - xiyuez/im-feeling-curious
+ - Dahoas/synthetic-instruct-gptj-pairwise
+ - Muennighoff/flan
+ - swype/instruct
+ - teven/code_contests
+ - samsum
+ - multi_news
+ - nampdn-ai/tiny-codes
+ - MBZUAI/LaMini-instruction
+ - izardLM/WizardLM_evol_instruct_70k
 
 #### Limitations 
 
