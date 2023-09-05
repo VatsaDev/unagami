@@ -49,3 +49,5 @@ Bot: No problem, I am happy to help you.
 ```
 
 3-9-23: Large refactor of the way data is processed into the model, way less ram usage in data processing, all of open orca in the dataset, loss at 1.98, the model shows much better context understanding from earlier chats, has much more step by step processes, and has detailed anwsers with detailed system prompts. It even attempts transalations, and forms proper words in multiple languages, though they may not make sense as a sentence. 
+
+5-9-23: Added all the data I plan to add to this model, trained on around 4 billion tokens, loss at 1.2, works with some self awareness and factuality
