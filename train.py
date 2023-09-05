@@ -115,11 +115,13 @@ ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torc
 ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)   
 
 def download_file(url, file_name):
-  response = requests.get(url)
+  response = requests.get(url, stream=True)
   if response.status_code == 200:
     with open(file_name, 'wb') as f:
-      f.write(response.content)
-      print(f"got: {file_name}")
+      for chunk in response.iter_content(chunk_size=104857600):
+        if chunk:
+          f.write(chunk)
+        print(f"got: {file_name}")
   else:
     print('Error downloading file:', response.status_code)
 
@@ -127,10 +129,11 @@ data_dir = os.path.join('data', dataset)
 
 if hf_binaries == True:
     print("Using HuggingFace binaries...")
-    download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/trainTotal.bin', 'traintotal.bin')
     download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/valTotal.bin','valtotal.bin')
+    download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/trainTotal.bin', 'traintotal.bin')
     train_data = np.memmap('traintotal.bin', dtype=np.uint16, mode='r')
     val_data = np.memmap('valtotal.bin', dtype=np.uint16, mode='r')
+    print("got binaries, batching")
 else:
     print("Using regular binaries...")
     train_data = np.memmap(os.path.join(data_dir, 'traintotal.bin'), dtype=np.uint16, mode='r')
