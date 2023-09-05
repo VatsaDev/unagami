@@ -15,7 +15,7 @@ always_save_checkpoint = False
 
 batch_size = 4
 gradient_accumulation_steps = 32
-max_iters = 50
+max_iters = 200
 
 # finetune at constant LR
 learning_rate = 3e-4
