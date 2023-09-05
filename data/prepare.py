@@ -11,21 +11,35 @@ enc = tiktoken.get_encoding("gpt2")
 def download_file(url):
   response = requests.get(url, stream=True)
   if response.status_code == 200:
-    chunk_number = 1
-    with open('dataset_chunk_{}.txt'.format(chunk_number), 'wb') as f:
+    with open('dataset.txt', 'wb') as f:
       for chunk in response.iter_content(chunk_size=1048576):
         f.write(chunk)
-        if chunk_number % 100 == 0:
-          # Create a new file for the next chunk
-          f.close()
-          chunk_number += 1
-          with open('dataset_chunk_{}.txt'.format(chunk_number), 'wb') as f:
-            f.write(chunk)
       print("downloaded dataset, tokenizing")
   else:
     print('Error downloading file:', response.status_code)
 
 download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/data.txt')
+
+
+def split_file(filename, output_dir, chunk_size):
+  if not os.path.exists(output_dir):
+    os.mkdir(output_dir)
+
+  with open(filename, 'r') as f:
+    lines = f.readlines()
+
+  n_chunks = len(lines) // chunk_size
+  for i in range(n_chunks):
+    start = i * chunk_size
+    end = min((i + 1) * chunk_size, len(lines))
+
+    chunk_lines = lines[start:end]
+
+    output_filename = os.path.join(output_dir, f'{i}-dataset.txt')
+    with open(output_filename, 'w') as f:
+      f.writelines(chunk_lines)
+
+split_file('dataset.txt', 'output', 80000)
 
 train_len = 0
 val_len = 0
