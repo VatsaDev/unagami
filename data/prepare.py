@@ -21,25 +21,22 @@ def download_file(url):
 download_file('https://huggingface.co/VatsaDev/unagami/resolve/main/data.txt')
 
 
-def split_file(filename, output_dir, chunk_size):
+def split_file_stream(filename, output_dir, chunk_size):
   if not os.path.exists(output_dir):
     os.mkdir(output_dir)
 
-  with open(filename, 'r') as f:
-    lines = f.readlines()
+  with open(filename, 'rb') as f:
+    for i in range(int(len(f) / chunk_size) + 1):
+      start = i * chunk_size
+      end = min((i + 1) * chunk_size, len(f))
 
-  n_chunks = len(lines) // chunk_size
-  for i in range(n_chunks):
-    start = i * chunk_size
-    end = min((i + 1) * chunk_size, len(lines))
+      chunk = f.read(end - start)
 
-    chunk_lines = lines[start:end]
+      output_filename = os.path.join(output_dir, f'{i}-dataset.txt')
+      with open(output_filename, 'wb') as f:
+        f.write(chunk)
 
-    output_filename = os.path.join(output_dir, f'{i}-dataset.txt')
-    with open(output_filename, 'w') as f:
-      f.writelines(chunk_lines)
-
-split_file('dataset.txt', 'output', 80000)
+split_file_stream('dataset.txt', 'output', 1024 * 1024 * 10) #100mb file
 
 train_len = 0
 val_len = 0
