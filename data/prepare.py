@@ -16,11 +16,12 @@ def download_file(url, output_dir):
   
   response = requests.get(url, stream=True)
   if response.status_code == 200:
-    for chunk in response.iter_content(chunk_size=1048576):
+    for chunk in response.iter_content(chunk_size=104857600):
       chunk_no=chunk_no+1
       output_filename = os.path.join(output_dir, f'{chunk_no}-dataset.txt')
       with open(output_filename, 'wb') as f:
         f.write(chunk)
+        print(f"made chunk {chunk_no}")
     print("downloaded and chunked dataset, proceeding to tokenizing...")
   else:
     print('Error downloading file:', response.status_code)
