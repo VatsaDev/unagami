@@ -26,14 +26,6 @@ Format inspired by `oasst-pythia-12b`
 <Bot> ... <endOfText>
 ```
 
-## Problems / TODOs
-   - More Data
-     - need more data, tends to improve every time
-   - Better Math, and programming skills, and logical reasoning
-     - While better than NanoChatGPT, still needs better abilities at math, programming, and logical reasoning 
-   - Summary and translations
-  		 - While The model is getting better at staying on topic and summarzing, it still needs work, and the translations it makes are weak.
-   
 ## whats in the data
  - oasst/oasst-1
  - eluthierAI/arithmetic
